@@ -183,6 +183,12 @@ class ExportGLTF2_Base():
             default=False
     )
 
+    export_text_meshes = BoolProperty(
+            name='Export text as meshes',
+            description='Export FONT objects as meshes',
+            default=True
+    )
+
     export_yup = BoolProperty(
             name='Convert Z up to Y up',
             description='',
@@ -338,6 +344,7 @@ class ExportGLTF2_Base():
         export_settings['gltf_selected'] = self.export_selected
         export_settings['gltf_layers'] = self.export_layers
         export_settings['gltf_extras'] = self.export_extras
+        export_settings['gltf_export_text_meshes'] = self.export_text_meshes
         export_settings['gltf_yup'] = self.export_yup
         export_settings['gltf_apply'] = self.export_apply
         export_settings['gltf_animations'] = self.export_animations
@@ -393,6 +400,7 @@ class ExportGLTF2_Base():
         col.prop(self, 'export_selected')
         col.prop(self, 'export_layers')
         col.prop(self, 'export_extras')
+        col.prop(self, 'export_text_meshes')
         col.prop(self, 'export_yup')
 
         col = layout.box().column()

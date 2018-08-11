@@ -1638,7 +1638,9 @@ def generate_node_instance(context,
         #
         #
 
-        if blender_object.type in ('MESH', 'CURVE', 'FONT'):
+        font_mesh = export_settings['gltf_export_text_meshes']
+        
+        if blender_object.type in ('MESH', 'CURVE') or blender_object.type == 'FONT' and font_mesh:
             mesh = get_mesh_index(glTF, blender_object.data.name)
 
             if mesh >= 0:
@@ -1706,6 +1708,9 @@ def generate_node_instance(context,
 
     if export_settings['gltf_extras']:
         extras = create_custom_property(blender_object)
+
+        if isinstance(blender_object.data, bpy.types.TextCurve):
+            extras['text'] = blender_object.data.body
 
         if extras is not None:
             node['extras'] = extras
